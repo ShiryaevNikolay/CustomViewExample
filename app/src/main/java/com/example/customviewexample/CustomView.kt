@@ -55,10 +55,12 @@ class CustomView @JvmOverloads constructor(
         val eventX = event.x.toInt()
         val eventY = event.y.toInt()
 
+        val size = (MIN_SIZE..MAX_SIZE).random()
+
         val newView = View(context).apply {
             layoutParams = LayoutParams(
-                dpToPx(50),
-                dpToPx(50)
+                dpToPx(size),
+                dpToPx(size)
             ).apply {
                 val x = eventX - (width / 2)
                 val y = eventY - (height / 2)
