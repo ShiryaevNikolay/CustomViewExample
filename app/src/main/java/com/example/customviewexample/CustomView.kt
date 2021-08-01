@@ -1,11 +1,8 @@
 package com.example.customviewexample
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 
 class CustomView @JvmOverloads constructor(
     context: Context, attrs:
@@ -14,9 +11,17 @@ class CustomView @JvmOverloads constructor(
 
     companion object {
         const val DEFAULT_COLOR_RES = R.color.defaultColorCv
+        const val MIN_SIZE = 20
+        const val MAX_SIZE = 50
     }
 
+    private val drawablesList  = listOf(
+        R.drawable.bg_circle,
+        R.drawable.bg_rectangle,
+        R.drawable.bg_rectangle_rounded,
+    )
     private var defaultColorRes = DEFAULT_COLOR_RES
+    private var colorsList: List<Int> = listOf()
 
     init {
         obtainAttrs(context, attrs)
@@ -31,8 +36,11 @@ class CustomView @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    @SuppressLint("ResourceType")
     private fun initViews() {
         setBackgroundResource(defaultColorRes)
+    }
+
+    private fun setColorList(colorsList: List<Int>) {
+        this.colorsList = colorsList
     }
 }
