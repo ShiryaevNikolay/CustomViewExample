@@ -6,7 +6,6 @@ import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import androidx.core.view.marginTop
 import kotlin.math.roundToInt
 
 class CustomView @JvmOverloads constructor(
@@ -14,7 +13,10 @@ class CustomView @JvmOverloads constructor(
     AttributeSet? = null
 ) : FrameLayout(context, attrs), View.OnTouchListener {
 
+    var onChangeEvent: ((Int) -> Unit)? = null
+
     companion object {
+        const val MAX_COUNT_VIEWS = 10
         const val DEFAULT_COLOR_RES = R.color.defaultColorCv
         const val MIN_SIZE = 20
         const val MAX_SIZE = 50
@@ -25,7 +27,7 @@ class CustomView @JvmOverloads constructor(
         R.drawable.bg_rectangle,
         R.drawable.bg_rectangle_rounded,
     )
-    private val views = mutableListOf<View>()
+    private var countViews = 0
     private var defaultColorRes = DEFAULT_COLOR_RES
     private var colorsList = emptyList<Int>()
 
@@ -33,6 +35,10 @@ class CustomView @JvmOverloads constructor(
         obtainAttrs(context, attrs)
         initViews()
         setOnTouchListener(this)
+    }
+
+    fun setColorList(colorsView: List<Int>) {
+        this.colorsList = colorsView
     }
 
     private fun obtainAttrs(context: Context, attrs: AttributeSet?) {
@@ -47,30 +53,39 @@ class CustomView @JvmOverloads constructor(
         setBackgroundResource(defaultColorRes)
     }
 
-    private fun setColorList(colorsList: List<Int>) {
-        this.colorsList = colorsList
-    }
-
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        val eventX = event.x.toInt()
-        val eventY = event.y.toInt()
+        if (event.action == MotionEvent.ACTION_DOWN && countViews < MAX_COUNT_VIEWS) {
+            val eventX = event.x.toInt()
+            val eventY = event.y.toInt()
 
-        val size = (MIN_SIZE..MAX_SIZE).random()
-        val drawableIndex = (0..2).random()
-
-        val newView = View(context).apply {
-            layoutParams = LayoutParams(
-                dpToPx(size),
-                dpToPx(size)
-            ).apply {
-                val x = eventX - (width / 2)
-                val y = eventY - (height / 2)
-                setMargins(x, y, 0, 0)
+            val size = (MIN_SIZE..MAX_SIZE).random()
+            val drawableIndex = (0..2).random()
+            val colorView = if (colorsList.isNotEmpty()) {
+                (colorsList.indices).random()
+            } else {
+                DEFAULT_COLOR_RES
             }
-            setBackgroundResource(drawablesList[drawableIndex])
-        }
 
-        addView(newView)
+            val newView = View(context).apply {
+                layoutParams = LayoutParams(
+                    dpToPx(size),
+                    dpToPx(size)
+                ).apply {
+                    val x = eventX - (width / 2)
+                    val y = eventY - (height / 2)
+                    setMargins(x, y, 0, 0)
+                }
+                setBackgroundResource(drawablesList[drawableIndex])
+                setColorList(listOf(colorView))
+            }
+
+            addView(newView)
+            countViews += 1
+            onChangeEvent?.invoke(countViews)
+        } else if (countViews == MAX_COUNT_VIEWS) {
+            removeAllViews()
+            countViews = 0
+        }
 
         return true
     }
