@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 
 class CustomView @JvmOverloads constructor(
     context: Context, attrs:
@@ -33,7 +34,8 @@ class CustomView @JvmOverloads constructor(
         typedArray.recycle()
     }
 
+    @SuppressLint("ResourceType")
     private fun initViews() {
-        setBackgroundColor(defaultColorRes)
+        setBackgroundColor(ContextCompat.getColor(context, defaultColorRes))
     }
 }
