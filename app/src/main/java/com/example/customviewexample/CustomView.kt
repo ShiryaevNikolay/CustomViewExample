@@ -6,6 +6,7 @@ import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.view.marginTop
 import kotlin.math.roundToInt
 
 class CustomView @JvmOverloads constructor(
@@ -51,14 +52,18 @@ class CustomView @JvmOverloads constructor(
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        val x = event.x
-        val y = event.y
+        val eventX = event.x.toInt()
+        val eventY = event.y.toInt()
 
         val newView = View(context).apply {
             layoutParams = LayoutParams(
                 dpToPx(50),
                 dpToPx(50)
-            )
+            ).apply {
+                val x = eventX - (width / 2)
+                val y = eventY - (height / 2)
+                setMargins(x, y, 0, 0)
+            }
             setBackgroundResource(drawablesList.first())
         }
 
