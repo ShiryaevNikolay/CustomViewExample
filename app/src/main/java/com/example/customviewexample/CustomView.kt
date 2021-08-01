@@ -13,13 +13,9 @@ class CustomView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs) {
 
     companion object {
-        @SuppressLint("ResourceAsColor")
-        @ColorInt
         const val DEFAULT_COLOR_RES = R.color.defaultColorCv
     }
 
-    @SuppressLint("ResourceAsColor")
-    @ColorInt
     private var defaultColorRes = DEFAULT_COLOR_RES
 
     init {
@@ -27,7 +23,6 @@ class CustomView @JvmOverloads constructor(
         initViews()
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun obtainAttrs(context: Context, attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomView)
 
