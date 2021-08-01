@@ -56,6 +56,7 @@ class CustomView @JvmOverloads constructor(
         val eventY = event.y.toInt()
 
         val size = (MIN_SIZE..MAX_SIZE).random()
+        val drawableIndex = (0..2).random()
 
         val newView = View(context).apply {
             layoutParams = LayoutParams(
@@ -66,7 +67,7 @@ class CustomView @JvmOverloads constructor(
                 val y = eventY - (height / 2)
                 setMargins(x, y, 0, 0)
             }
-            setBackgroundResource(drawablesList.first())
+            setBackgroundResource(drawablesList[drawableIndex])
         }
 
         addView(newView)
