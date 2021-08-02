@@ -77,7 +77,6 @@ class CustomView @JvmOverloads constructor(
                     setMargins(x, y, 0, 0)
                 }
                 setBackgroundResource(drawablesList[drawableIndex])
-//                setBackgroundResource(colorsList[colorView])
                 backgroundTintList = ContextCompat.getColorStateList(context, colorsList[colorView])
             }
 

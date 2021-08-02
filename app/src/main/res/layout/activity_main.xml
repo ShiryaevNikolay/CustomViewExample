@@ -10,12 +10,13 @@
         android:id="@+id/custom_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultColor="@color/purple_500"/>
+        app:defaultColor="@color/teal_200"/>
 
     <TextView
         android:id="@+id/count_views_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textSize="40dp"
         tools:text="10" />
 </FrameLayout>
