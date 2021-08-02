@@ -6,6 +6,7 @@ import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 
 class CustomView @JvmOverloads constructor(
@@ -76,7 +77,8 @@ class CustomView @JvmOverloads constructor(
                     setMargins(x, y, 0, 0)
                 }
                 setBackgroundResource(drawablesList[drawableIndex])
-                setColorList(listOf(colorView))
+//                setBackgroundResource(colorsList[colorView])
+                backgroundTintList = ContextCompat.getColorStateList(context, colorsList[colorView])
             }
 
             addView(newView)

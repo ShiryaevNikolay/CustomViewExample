@@ -10,9 +10,9 @@
 
     <color name="defaultColorCv">@android:color/holo_green_light</color>
 
-    <color name="color_1">#FFCDD2</color>
-    <color name="color_2">#E1BEE7</color>
-    <color name="color_3">#BBDEFB</color>
-    <color name="color_4">#C8E6C9</color>
-    <color name="color_5">#FFF9C4</color>
+    <color name="color_1">#F44336</color>
+    <color name="color_2">#3F51B5</color>
+    <color name="color_3">#4CAF50</color>
+    <color name="color_4">#FFEB3B</color>
+    <color name="color_5">#795548</color>
 </resources>
